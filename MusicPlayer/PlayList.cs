@@ -4,11 +4,9 @@ using System.Linq;
 
 namespace MusicPlayer
 {
-    class PlayList 
+    class PlayList : EntityId
     {
-        public Guid Id { get; private set; }
-
-        private ICollection<Song> _songs;
+        private readonly ICollection<Song> _songs;
 
         public PlayList()
         {
@@ -23,7 +21,6 @@ namespace MusicPlayer
         public virtual ICollection<Song> Songs
         {
             get { return _songs; }
-            private set { _songs = value; }
         }
 
         public void AddSong(Song song)
@@ -42,17 +39,27 @@ namespace MusicPlayer
 
         public override string ToString()
         {
-            return (PlayListName + " " + MusicPlayListTime);
+            return Songs.Aggregate(PlayListName + " " + MusicPlayListTime + Environment.NewLine, (current, song) => current + song.ToString() + Environment.NewLine);
         }
 
-        public ICollection<Song> FindSong(Func<Song,bool> f)  
+        public ICollection<Song> FindSong(Func<Song, bool> f)
         {
             return Songs.Where(f).ToList();
         }
 
-        public ICollection<Song> ShuffleSongs()
+        public void ShuffleSongs()
         {
-            return Songs=Songs.OrderBy(s => s.Id).ToList();
+            var rnd = new Random();
+            var newList = new SortedList<int, Song>();
+            foreach (var song in Songs)
+            {
+                newList.Add(rnd.Next(), song);
+            }
+            Songs.Clear();
+            for (var i = 0; i < newList.Count; i++)
+            {
+                Songs.Add(newList.Values[i]);
+            }
         }
     }
 }

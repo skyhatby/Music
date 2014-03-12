@@ -2,10 +2,8 @@
 
 namespace MusicPlayer
 {
-    class Song 
+    class Song : EntityId
     {
-        public Guid Id { get; private set; }
-
         public Song()
         {
             Id=Guid.NewGuid();
@@ -14,5 +12,10 @@ namespace MusicPlayer
         public string SongName { get; set; }
         public TimeSpan SongTime { get; set; }
         public string FilePass { get; set; }
+
+        public override string ToString()
+        {
+            return SongName + " " + SongTime;
+        }
     }
 }
