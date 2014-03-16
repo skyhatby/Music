@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace MusicPlayer
 {
-
-
-
     class PlayMusic
     {
         public PlayMusic(PlayList pl)
@@ -64,12 +56,13 @@ namespace MusicPlayer
         {
             var begin = getCurrentTimeSpan() + song.SongTime;
             var tmr = new Timer(TimerHelper, song, 10000, 10000);
+// ReSharper disable once LoopVariableIsNeverChangedInsideLoop
             while (begin >= getCurrentTimeSpan()) PlaySong();
             tmr.Dispose();
         }
 
 
-        private void PlaySong()
+        private static void PlaySong()
         {
             Console.Beep();
         }

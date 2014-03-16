@@ -8,11 +8,11 @@ namespace MusicPlayer
         static void Main()
         {
             var time = new TimeSpan(00, 00, 10);
-            var song1 = new Song { FilePass = "f:/music/star.mp3", SongName = "Star", SongTime = time };
-            var song2 = new Song { FilePass = "f:/music/road.mp3", SongName = "Road", SongTime = time };
-            var song3 = new Song { FilePass = "f:/music/road.mp3", SongName = "Road1", SongTime = time };
-            var song4 = new Song { FilePass = "f:/music/road.mp3", SongName = "Road2", SongTime = time };
-            var pl = new PlayList {PlayListName = "PlayList"};
+            var song1 = new Song { FilePass = "f:/music/star.mp3", Name = "Star", SongTime = time };
+            var song2 = new Song { FilePass = "f:/music/road.mp3", Name = "Road", SongTime = time };
+            var song3 = new Song { FilePass = "f:/music/road.mp3", Name = "Road1", SongTime = time };
+            var song4 = new Song { FilePass = "f:/music/road.mp3", Name = "Road2", SongTime = time };
+            var pl = new PlayList {Name = "PlayList"};
             pl.AddSong(song1);
             pl.AddSong(song2);
             pl.AddSong(song3);

@@ -14,8 +14,7 @@ namespace MusicPlayer
             Id = Guid.NewGuid();
         }
 
-        public string PlayListName { get; set; }
-
+        
         public TimeSpan MusicPlayListTime { get; private set; }
 
         public virtual ICollection<Song> Songs
@@ -30,10 +29,8 @@ namespace MusicPlayer
             MusicPlayListTime += song.SongTime;
         }
 
-        public void DeliteSong(string songName)
+        public void DeliteSong(Song song)
         {
-            if (songName == "") return;
-            var song = FindSong(s => s.SongName == songName).FirstOrDefault();
             if (song == null) return;
             _songs.Remove(song);
             MusicPlayListTime -= song.SongTime;
@@ -41,7 +38,7 @@ namespace MusicPlayer
 
         public override string ToString()
         {
-            return Songs.Aggregate(PlayListName + " " + MusicPlayListTime + Environment.NewLine, (current, song) => current + song.ToString() + Environment.NewLine);
+            return Songs.Aggregate(_name + " " + MusicPlayListTime + Environment.NewLine, (current, song) => current + song.ToString() + Environment.NewLine);
         }
 
         public ICollection<Song> FindSong(Func<Song, bool> f)
