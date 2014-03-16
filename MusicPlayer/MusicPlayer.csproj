@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityId.cs" />
+    <Compile Include="PlayingSongEventArgs.cs" />
     <Compile Include="PlayList.cs" />
     <Compile Include="PlayMusic.cs" />
     <Compile Include="Program.cs" />

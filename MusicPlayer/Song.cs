@@ -2,7 +2,7 @@
 
 namespace MusicPlayer
 {
-    class Song : EntityId
+    public class Song : EntityId
     {
         public Song()
         {

@@ -2,7 +2,7 @@
 
 namespace MusicPlayer
 {
-    class EntityId
+    public class EntityId
     {
         public Guid Id { get; protected set; }
     }

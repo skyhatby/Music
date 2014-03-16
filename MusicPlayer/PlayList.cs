@@ -30,8 +30,10 @@ namespace MusicPlayer
             MusicPlayListTime += song.SongTime;
         }
 
-        public void DeliteSong(Song song)
+        public void DeliteSong(string songName)
         {
+            if (songName == "") return;
+            var song = FindSong(s => s.SongName == songName).FirstOrDefault();
             if (song == null) return;
             _songs.Remove(song);
             MusicPlayListTime -= song.SongTime;
