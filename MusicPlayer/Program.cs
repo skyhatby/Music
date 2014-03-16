@@ -7,7 +7,7 @@ namespace MusicPlayer
     {
         static void Main()
         {
-            var time = new TimeSpan(00, 00, 25);
+            var time = new TimeSpan(00, 00, 10);
             var song1 = new Song { FilePass = "f:/music/star.mp3", SongName = "Star", SongTime = time };
             var song2 = new Song { FilePass = "f:/music/road.mp3", SongName = "Road", SongTime = time };
             var song3 = new Song { FilePass = "f:/music/road.mp3", SongName = "Road1", SongTime = time };
@@ -19,28 +19,27 @@ namespace MusicPlayer
             pl.AddSong(song4);
             
             Console.WriteLine(pl);
-            //pl.ShuffleSongs();
+            pl.ShuffleSongs();
+            Console.WriteLine(pl);
             var play = new PlayMusic(pl);
             play.PlayingSong += PlayMusic_PlayingSong;
             play.TenSecPlaying += PlayMusic_TenSecPlaying;
             var th = new Thread(play.Play);
             th.Start();
             Thread.Sleep(10000);
-            pl.DeliteSong("Star");
-            //play.Play();
-           // Console.WriteLine(pl);
+            pl.AddSong(song1);
             Console.ReadKey();
         }
 
         private static void PlayMusic_PlayingSong(object sender, PlayingSongEventArgs e)
         {
-            Console.WriteLine(e.PlayingSong);
+            Console.WriteLine("Begin to play : "+e.PlayingSong);
             Console.WriteLine("-------------------");
         }
 
         private static void PlayMusic_TenSecPlaying(object sender, PlayingSongEventArgs e)
         {
-            Console.WriteLine("Now playing: {0}",e.PlayingSong);
+            Console.WriteLine("Now playing: {0}{1}", e.PlayingSong, Environment.NewLine);
         }
     }
 }

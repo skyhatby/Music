@@ -45,23 +45,31 @@ namespace MusicPlayer
 
         public void Play()
         {
-            foreach (var song in PlayList.Songs)
+            try
             {
-                OnPlayingSong(new PlayingSongEventArgs(song));
-                var begin = getCurrentTimeSpan() + song.SongTime;
-                var tmr = new Timer(TimerHelper, song, 10000, 10000);
-                while (begin >= getCurrentTimeSpan())
+                foreach (var song in PlayList.Songs)
                 {
-                    PlaySong();
+                    OnPlayingSong(new PlayingSongEventArgs(song));
+                    PlayingProcess(song);
                 }
-                tmr.Dispose();
-                Console.WriteLine();
             }
+            catch (InvalidOperationException)
+            {
+                Play();
+            }
+            
+        }
+
+        private void PlayingProcess(Song song)
+        {
+            var begin = getCurrentTimeSpan() + song.SongTime;
+            var tmr = new Timer(TimerHelper, song, 10000, 10000);
+            while (begin >= getCurrentTimeSpan()) PlaySong();
+            tmr.Dispose();
         }
 
 
-
-        public void PlaySong()
+        private void PlaySong()
         {
             Console.Beep();
         }
